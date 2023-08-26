@@ -131,7 +131,7 @@ class GEM_u8g2 {
 
     /* DRAW OPERATIONS */
 
-    void drawMenu();                                     // Draw menu on screen, with menu page set earlier in GEM_u8g2::setMenuPageCurrent()
+    void drawMenu(boolean shouldDraw = false);                                     // Draw menu on screen, with menu page set earlier in GEM_u8g2::setMenuPageCurrent(), only draws if fed 'true'
 
     /* KEY DETECTION */
 

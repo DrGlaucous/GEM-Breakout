@@ -233,15 +233,29 @@ void GEM_u8g2::clearContext() {
 
 //====================== DRAW OPERATIONS
 
-void GEM_u8g2::drawMenu() {
+void GEM_u8g2::drawMenu(boolean shouldDraw)
+{
+
+  //the menu will now only update when we want it to.
+  if(!shouldDraw)
+    return;
+
+  //it is up to the user to call the u8g2 draw cycle
+  drawTitleBar();
+  printMenuItems();
+  drawMenuPointer();
+  drawScrollbar();
+
   // _u8g2.clear(); // Not clearing for better performance
-  _u8g2.firstPage();
-  do {
-    drawTitleBar();
-    printMenuItems();
-    drawMenuPointer();
-    drawScrollbar();
-  } while (_u8g2.nextPage());
+  // _u8g2.firstPage();
+  // do
+  // {
+  //   drawTitleBar();
+  //   printMenuItems();
+  //   drawMenuPointer();
+  //   drawScrollbar();
+  // } while (_u8g2.nextPage());
+
 }
 
 void GEM_u8g2::drawTitleBar() {

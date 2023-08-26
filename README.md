@@ -2,6 +2,30 @@
 ![GEM](http://spirik.ru/downloads/misc/gem/gem-logo.svg)
 ===========
 
+What is this fork?
+---
+
+This fork breaks out the drawing sub-functions so the user has more control over when the menu draws.
+
+Currently, the only changes that were made were to the u8g2 backend.
+
+`drawMenu` now needs to be called with argument 'true' in order to actually draw the menu (doing this was easier than deleting every instance of `drawMenu` from the backend).
+This allows the user to update the menu without having to re-draw it every time (in case multiple button events need to be handled in the same frame)
+`void drawMenu(boolean shouldDraw = false);`
+Additionally, the u8g2 draw cycle has been moved outside this function.
+This allows other things to be drawn in sequence with the menu elements.
+To use the altered drawMenu function, it should look like this:
+```
+  _u8g2.clear();
+  _u8g2.firstPage();
+  do
+  {
+    menu.drawMenu(true);
+  } while (_u8g2.nextPage());
+```
+
+
+---
 GEM (a.k.a. *Good Enough Menu*) - Arduino library for creation of graphic multi-level menu with editable menu items, such as variables (supports `int`, `byte`, `float`, `double`, `boolean`, `char[17]` data types) and option selects. User-defined callback function can be specified to invoke when menu item is saved.
   
 Supports buttons that can invoke user-defined actions and create action-specific context, which can have its own enter (setup) and exit callbacks as well as loop function.
